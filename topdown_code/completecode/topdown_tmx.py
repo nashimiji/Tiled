@@ -112,7 +112,6 @@ while True:
     pyscroll_group.draw(screen)
 
     #tile_sprite_group.draw(screen)
-    #object_sprite_group.draw(screen)
     #player_sprite_group.draw(screen)
     player_sprite_group.update()
     
