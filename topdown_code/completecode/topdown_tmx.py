@@ -86,7 +86,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.direction.x * speed
         self.rect.y += self.direction.y * speed
     
-    def update(self):
+    def update(self,dt):
         self.input()
         self.move(self.speed)
         self.player_animate(dt)
@@ -152,7 +152,7 @@ while True:
 
     #tile_sprite_group.draw(screen)
     #player_sprite_group.draw(screen)
-    player_sprite_group.update()
+    player_sprite_group.update(dt)
     
     pygame.display.update()
     clock.tick(FPS)
