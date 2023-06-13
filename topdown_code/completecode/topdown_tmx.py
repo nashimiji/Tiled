@@ -54,7 +54,7 @@ class Player(pygame.sprite.Sprite):
 
 
 # Import tiled layers with pytmx
-tmx_data = load_pygame('D:\\งานนานา\\โครงงานคอม\\Tiled\\Mult_Layer.tmx')
+tmx_data = load_pygame('C:\\Users\\170361\\Desktop\\KR01\\Tiled\\Mult_Layer.tmx')
 
 map_data = pyscroll.TiledMapData(tmx_data)
 
