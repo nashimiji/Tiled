@@ -1,5 +1,6 @@
 import pygame, sys
 from pytmx.util_pygame import load_pygame
+from os import walk
 import pyscroll 
 
 pygame.init()
@@ -11,7 +12,20 @@ pygame.display.set_caption("Topdown game level created by Tiled")
 
 FPS = 60
 clock = pygame.time.Clock()
+dt = clock.tick(FPS)/1000
 
+#import animation
+def import_assets(assets_path):
+    surface_list = []
+
+    for i,j,image_file in walk(assets_path):
+        for image in image_file:
+            file_path = assets_path + '/' + image
+            print(file_path)
+            image_surf = pygame.image.load(file_path).convert_alpha
+            surface_list.append(image_surf)
+
+    return surface_list 
 
 class Player(pygame.sprite.Sprite):
 
@@ -24,19 +38,43 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.speed = 2
 
+        # animation
+        self.import_player_animations()
+        #self.frame_index = 0
+        self.status = 'down'
+
+    def import_player_animations(self):
+        self.animation_dict = {'up':[],'down':[],'right':[],'left':[]}
+        print(self.animation_dict.key())
+
+        for animation in self.animation_dict.keys():
+            anim_path = '../graphics/player_anim' + '/' + animation
+            self.animation_dict[animation] = import_assets(anim_path)
+
+    def player_animate(self,dt):
+        self.frame_index += 4* dt
+        if self.frame_index >= len(self.animation_dict[self.status]):
+            self.frame_index = 0
+
+        self.image = self.animation_dict[self.status][int(self.frame_index)]
+
     def input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
             self.direction.y = -1
+            self.status = 'up'
         elif keys[pygame.K_DOWN]:
             self.direction.y = 1
+            self.status = 'down'
         else:
             self.direction.y = 0
         
         if keys[pygame.K_RIGHT]:
             self.direction.x = 1
+            self.status = 'right'
         elif keys[pygame.K_LEFT]:
             self.direction.x = -1
+            self.status = 'left'
         else:
             self.direction.x = 0
     
@@ -51,6 +89,7 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.input()
         self.move(self.speed)
+        self.player_animate(dt)
 
 
 # Import tiled layers with pytmx
