@@ -1616,6 +1616,6 @@
   <object id="1535" gid="45" x="442" y="1840" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="Player_Layer">
-  <object id="489" name="Player_Start" gid="68" x="993.333" y="1026.67" width="32" height="32"/>
+  <object id="489" name="Player_Start" gid="68" x="129.666" y="1922" width="32" height="32"/>
  </objectgroup>
 </map>

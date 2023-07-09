@@ -11,7 +11,6 @@ from debug_movement import debug_on_screen
 # from pyscroll.group import PyscrollGroup
 
 
-
 # Sirakorn
 def generate_abs_path(rel_path):
     return path.join(path.dirname(path.abspath(__file__)), rel_path)
@@ -152,6 +151,7 @@ class Tile(pygame.sprite.Sprite):
 
 for layer in tmx_data.visible_layers:
     if hasattr(layer, "data"):
+        print(f"Layer {layer} drawn using visible layer data")
         for x, y, surf in layer.tiles():
             pos = (x * 32, y * 32)  # Mult by tilesize
             Tile(pos=pos, surf=surf, groups=tile_sprite_group)
