@@ -78,6 +78,7 @@ class Player(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_UP]:
+            print("UP!!!")
             self.direction.y = -1
             self.status = "up"
 
